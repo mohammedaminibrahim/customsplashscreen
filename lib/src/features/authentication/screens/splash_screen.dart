@@ -1,3 +1,4 @@
+import 'package:customsplashscreen/src/constants/color_strings.dart';
 import 'package:customsplashscreen/src/constants/image_strings.dart';
 import 'package:customsplashscreen/src/constants/sizes.dart';
 import 'package:customsplashscreen/src/constants/text_strings.dart';
@@ -32,6 +33,18 @@ class SplashScreen extends StatelessWidget {
              const Positioned(
                bottom: 100,
                   child: Image(image: AssetImage(tSplashImage),
+                  )
+             ),
+              Positioned(
+                bottom: 40,
+                  right: tDefaultSize,
+                  child: Container(
+                    width: tSplashContainerSize,
+                    height: tSplashContainerSize,
+                    decoration:  BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: tPrimaryColor,
+                    ),
                   ))
             ],
           ),
