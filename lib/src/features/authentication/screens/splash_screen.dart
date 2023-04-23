@@ -2,10 +2,24 @@ import 'package:customsplashscreen/src/constants/color_strings.dart';
 import 'package:customsplashscreen/src/constants/image_strings.dart';
 import 'package:customsplashscreen/src/constants/sizes.dart';
 import 'package:customsplashscreen/src/constants/text_strings.dart';
+import 'package:customsplashscreen/src/features/authentication/screens/welcome.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  bool animate = false;
+
+
+  @override
+  void initState() {
+    startAninamation();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +27,10 @@ class SplashScreen extends StatelessWidget {
         body:
            Stack(
             children: [
-             const Positioned(
-                top: 0,
-                  left: 0,
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 1600),
+                top: animate ? 0 : -30,
+                  left: animate ? 0 : -30,
                   child: Image(image: AssetImage(tSplashTopIcon)
                   )
               ),
@@ -30,12 +45,14 @@ class SplashScreen extends StatelessWidget {
                     ],
                   )
               ),
-             const Positioned(
+              const AnimatedPositioned(
+                duration: const Duration(milliseconds: 1600),
                bottom: 100,
                   child: Image(image: AssetImage(tSplashImage),
                   )
              ),
-              Positioned(
+               AnimatedPositioned(
+                duration: const Duration(milliseconds: 1600),
                 bottom: 40,
                   right: tDefaultSize,
                   child: Container(
@@ -50,5 +67,15 @@ class SplashScreen extends StatelessWidget {
           ),
 
     );
+  }
+
+  Future startAninamation() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    setState(() {
+      animate = true;
+
+    });
+    await Future.delayed(Duration(milliseconds: 5000));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WelcomePage()));
   }
 }
